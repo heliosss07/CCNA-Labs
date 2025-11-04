@@ -12,6 +12,7 @@ This section contains my networking fundamentals and Cisco Packet Tracer labs co
 - IPV6 Addressing and Routing
 - Cisco Device Security
 - Network Device Management
+- Wireless Networking Fundamentals
   
 ## Objective
 To demonstrate understanding of networking concepts and Cisco configurations through practical lab exercises.

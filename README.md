@@ -5,7 +5,6 @@ This section contains my networking fundamentals and Cisco Packet Tracer labs co
 
 ## Contents
 - Dynamic Routing Protocol
-- Interior Gateway Protocol
 - Open Shortest Path First (OSPF)
 - Spanning Tree Protocol (STP)
 - EtherChannel

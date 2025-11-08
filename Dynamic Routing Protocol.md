@@ -29,4 +29,70 @@
 ## Configuration Summary
 
 ```bash
-#Standard Numbered ACLs
+#RIPv1
+router rip 
+network 10.0.0.0
+no auto-summary
+debug ip rip(R1)
+
+#RIPv2
+router rip
+version 2
+undebug all
+sh ip rip database
+
+
+#OSPF
+router ospf 1
+network 10.0.0.0 0.255.255.255 area 0
+sh ip ospf database
+
+no router ospf 1
+
+#EIGRP
+router eigrp 100
+no auto-summary
+network 10.0.0.0 0.255.255.255
+
+no router rip (on R5)
+no router eigrp 100(on R5)
+
+#Static Routes (for backup/incase link on R2 goes down and no eigrp)
+R1 ip route 10.1.0.0 255.255.0.0 10.0.3.2 95
+(AD because we still want EIGRP to be prioritized if its working) 
+R2 ip route 10.0.0.0 255.255.0.0 10.1.0.1 95
+R3 ip route 10.0.0.0 255.255.0.0 10.1.1.1 95
+R4 ip route 10.0.0.0 255.255.0.0 10.1.3.2 95
+
+R5 ip route 10.1.0.0 255.255.0.0 10.1.3.1 95
+R5 ip route 10.0.0.0 255.255.0.0 10.0.3.1 95
+
+#Loopback Interfaces
+int loopback0
+ip add 192.168.0.1 255.255.255.255
+
+int loopback0
+ip add 192.168.0.2 255.255.255.255
+
+int loopback0
+ip add 192.168.0.3 255.255.255.255
+
+int loopback0
+ip add 192.168.0.4 255.255.255.255
+
+int loopback0
+ip add 192.168.0.5 255.255.255.255
+
+#INCLUDING LOOPBACK INT ON EIGRP
+router eigrp 100
+network 192.168.0.0 0.0.0.255
+
+sh ip eigrp neigh
+
+#LOOPBACK AS PASSIVE INT
+
+router eigrp 100
+passive-interface loopback0
+passive-interface f1/1
+
+
